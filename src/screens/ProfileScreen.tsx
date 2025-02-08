@@ -3,7 +3,7 @@ import {View, ScrollView, TouchableOpacity, Image, Alert} from 'react-native';
 import {Text, Button, TextInput, Avatar, Surface} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../store';
-import {theme} from '../theme';
+import {theme} from '../theme/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MovieCard from '../components/MovieCard';
 import {updateProfile} from '../store/userSlice';

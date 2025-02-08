@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Platform, StyleSheet} from 'react-native';
-import {theme} from '../theme';
+import {theme} from '../theme/index';
 
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
@@ -13,6 +13,15 @@ import MovieDetailScreen from '../screens/MovieDetailScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
+type RootStackParamList = {
+  MovieDetail: {
+    movieId: string;
+    movie: {
+      title: string;
+    };
+  };
+};
 
 const TabNavigator = () => {
   return (
@@ -152,6 +161,11 @@ const AppNavigator = () => {
         <Stack.Screen 
           name="MovieDetail" 
           component={MovieDetailScreen}
+          options={({ route }) => ({
+            title: (route.params as RootStackParamList['MovieDetail']).movie?.title || 'Film Detayı',
+            headerTransparent: true,
+            headerTintColor: '#fff'
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

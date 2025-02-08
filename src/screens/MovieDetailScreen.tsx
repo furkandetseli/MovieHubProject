@@ -4,9 +4,9 @@ import {Text, IconButton, Surface} from 'react-native-paper';
 import {useRoute, RouteProp} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {AppDispatch, RootState} from '../store';
-import {theme} from '../theme';
+import {theme} from '../theme/index';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {addToFavorites, removeFromFavorites} from '../store/movieSlice';
+import {addFavorite, removeFavorite} from '../store/movieSlice';
 import LinearGradient from 'react-native-linear-gradient';
 
 type RootStackParamList = {
@@ -32,9 +32,9 @@ const MovieDetailScreen = () => {
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      dispatch(removeFromFavorites(movie.id));
+      dispatch(removeFavorite(movie.id));
     } else {
-      dispatch(addToFavorites(movie));
+      dispatch(addFavorite(movie));
     }
   };
 
@@ -77,6 +77,11 @@ const MovieDetailScreen = () => {
               variant="headlineMedium"
               style={{color: theme.colors.text, fontWeight: 'bold', marginBottom: 4}}>
               {movie.title}
+            </Text>
+            <Text
+              variant="bodyLarge"
+              style={{color: theme.colors.secondaryText}}>
+              {movie.director?.split('•')[0]}
             </Text>
             <Text
               variant="bodyLarge"

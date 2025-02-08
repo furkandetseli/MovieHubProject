@@ -86,7 +86,7 @@ const MovieCard = ({movie}: MovieCardProps) => {
             <Text
               variant="bodyMedium"
               style={{color: theme.colors.secondaryText, fontSize: 12}}>
-              {movie.year}
+              {movie.year} • {movie.director?.split('•')[0]}
             </Text>
             <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 4}}>
               <IconButton
@@ -98,7 +98,7 @@ const MovieCard = ({movie}: MovieCardProps) => {
               <Text
                 variant="bodyMedium"
                 style={{color: theme.colors.primary, fontSize: 12}}>
-                {movie.rating}/10
+                {Number(movie.rating).toFixed(1)}/10
               </Text>
             </View>
             <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 4}}>

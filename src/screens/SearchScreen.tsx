@@ -4,7 +4,7 @@ import {Searchbar, ActivityIndicator} from 'react-native-paper';
 import MovieCard from '../components/MovieCard';
 import {useSelector, useDispatch} from 'react-redux';
 import {AppDispatch, RootState} from '../store';
-import {theme} from '../theme';
+import {theme} from '../theme/index';
 import {searchMovies} from '../store/movieSlice';
 import {useDebounce} from '../hooks/useDebounce';
 
@@ -20,12 +20,33 @@ const SearchScreen = () => {
     }
   }, [debouncedQuery, dispatch]);
 
-  const normalizeText = (text: string) => {
+  const normalizeText = (text: string | undefined) => {
+    if (!text) return '';
     return text
       .toLowerCase()
-      .replace(/-/g, ' ')  // tire işaretlerini boşluğa çevir
-      .replace(/[^a-z0-9\s]/g, '')  // özel karakterleri kaldır
-      .trim();
+      .replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u')
+      .replace(/ş/g, 's')
+      .replace(/ı/g, 'i')
+      .replace(/ö/g, 'o')
+      .replace(/ç/g, 'c');
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const normalizedQuery = normalizeText(query);
+    
+    const filtered = movies.filter(movie => {
+      const normalizedTitle = normalizeText(movie.title);
+      const normalizedDirector = normalizeText(movie.director);
+      const normalizedGenres = movie.genre.map(g => normalizeText(g));
+      
+      return (
+        normalizedTitle.includes(normalizedQuery) ||
+        normalizedDirector.includes(normalizedQuery) ||
+        normalizedGenres.some(genre => genre.includes(normalizedQuery))
+      );
+    });
   };
 
   const filteredMovies = movies.filter(movie => {

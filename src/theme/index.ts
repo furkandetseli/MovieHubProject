@@ -1,4 +1,4 @@
-import {MD3DarkTheme} from 'react-native-paper';
+import {MD3DarkTheme, configureFonts} from 'react-native-paper';
 
 export const theme = {
   ...MD3DarkTheme,
@@ -29,6 +29,8 @@ export const theme = {
     xl: 32,
   },
 };
+
+export type AppTheme = typeof theme;
 
 export const styles = {
   container: {

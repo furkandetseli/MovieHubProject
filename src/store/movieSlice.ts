@@ -12,8 +12,8 @@ interface MovieState {
 }
 
 const initialState: MovieState = {
-  movies: [],
-  favorites: [],
+  movies: [] as Movie[],
+  favorites: [] as Movie[],
   loading: false,
   error: null,
   currentPage: 1,
@@ -41,6 +41,15 @@ export const searchMovies = createAsyncThunk(
     } catch (error) {
       return rejectWithValue('Film araması yapılırken hata oluştu.');
     }
+  }
+);
+
+export const fetchTopMovies = createAsyncThunk(
+  'movies/fetchTopMovies',
+  async () => {
+    const response = await fetch('https://api.example.com/top-movies');
+    const data = await response.json();
+    return data;
   }
 );
 

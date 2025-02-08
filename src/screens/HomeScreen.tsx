@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, FlatList, RefreshControl, ActivityIndicator} from 'react-native';
 import {Text} from 'react-native-paper';
 import MovieCard from '../components/MovieCard';
 import {useSelector, useDispatch} from 'react-redux';
 import {AppDispatch, RootState} from '../store';
-import {theme} from '../theme';
-import {fetchMovies, resetMovies} from '../store/movieSlice';
+import {theme} from '../theme/index';
+import {fetchMovies, resetMovies, fetchTopMovies} from '../store/movieSlice';
 
 const HomeScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,6 +13,10 @@ const HomeScreen = () => {
     (state: RootState) => state.movies,
   );
   const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchMovies(1));
+  }, []);
 
   // Filmleri puana göre sırala
   const sortedMovies = [...movies].sort((a, b) => {

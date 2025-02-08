@@ -30,7 +30,7 @@ npm start
 ```
 
 ## Demo Video
-[Demo video linki]
+[[Demo video linki]](https://github.com/furkandetseli/MovieHubProject/blob/main/minidemo.webm)
 
 ## APK Dosyası
 [APK dosyası linki]

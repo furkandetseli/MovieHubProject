@@ -33,7 +33,7 @@ npm start
 [[Demo video linki]](https://github.com/furkandetseli/MovieHubProject/blob/main/minidemo.webm)
 
 ## APK Dosyası
-[APK dosyası linki]
+[[APK dosyası linki]](https://github.com/furkandetseli/MovieHubProject/blob/main/app-release.apk)
 
 ## Özellikler
 - Film listesi görüntüleme ve arama
